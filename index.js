@@ -3,8 +3,8 @@ const express = require("express");
 const path = require("path");
 const TelegramBot = require("node-telegram-bot-api");
 
-const gameName = "YOUR_GAME_NAME_GOES_HERE";
-const webURL = "www.YOUR_URL.com";
+const gameName = "ANewTestGame";
+// const webURL = "www.YOUR_URL.com";
 
 const server = express();
 const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
@@ -43,7 +43,7 @@ bot.on("callback_query", function (query) {
     );
   } else {
     queries[query.id] = query;
-    const gameurl = `https://${webURL}/index.html?id=${query.id}`;
+    const gameurl = `https://${process.env.WEB_URL}/index.html?id=${query.id}`;
     bot.answerCallbackQuery(query.id, { url: gameurl });
   }
 });
